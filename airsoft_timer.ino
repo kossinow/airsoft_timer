@@ -53,6 +53,8 @@ void setup() {
   // инициализируем кнопки
   set_btn.begin();
   start_btn.begin();
+  pinMode(buzzer_pin, OUTPUT);
+  pinMode(light_pin, OUTPUT);
 
 }
 
@@ -143,12 +145,12 @@ void counting() { // режим отсчета времени
   else if (second_mode == 1){ // состояние сирены и мигания
 
     if (millis() - t_blink < 4000){
-      pinMode(buzzer_pin, OUTPUT);
-      tone(buzzer_pin, 1000);
+      digitalWrite(buzzer_pin, HIGH);
+      digitalWrite(light_pin, HIGH);
     }
     else {
-      noTone(buzzer_pin);
-      pinMode(buzzer_pin, INPUT);
+      digitalWrite(buzzer_pin, LOW);
+      digitalWrite(light_pin, LOW);
       min = EEPROM.read(addr_min);
       sec = 0;
       mode = 2;
